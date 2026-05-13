@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Inline-HTML rendering primitives for rich Gemini outputs. */
+.ai-md .card { border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.04); border-radius: 10px; padding: 10px 12px; margin: 0.6em 0; }
+.dark .ai-md .card { border-color: rgba(23,23,23,0.1); background: rgba(23,23,23,0.04); }
+.ai-md .callout { border-left: 2px solid #a7f56b; background: rgba(167,245,107,0.08); padding: 8px 10px; border-radius: 0 6px 6px 0; margin: 0.6em 0; }
+.ai-md .callout--warn { border-left-color: #fbbf24; background: rgba(251,191,36,0.08); }
+.ai-md .callout--info { border-left-color: #93c5fd; background: rgba(147,197,253,0.08); }
+.ai-md .callout--danger { border-left-color: #fca5a5; background: rgba(252,165,165,0.08); }
+.ai-md .grid { display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); margin: 0.6em 0; }
+.ai-md .step { display: flex; gap: 10px; padding: 6px 0; }
+.ai-md .step__num { flex: 0 0 22px; width: 22px; height: 22px; border-radius: 50%; background: rgba(167,245,107,0.14); color: #a7f56b; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 11px; }
+.ai-md .kpi { display: inline-flex; flex-direction: column; padding: 8px 10px; border-radius: 8px; background: rgba(255,255,255,0.06); margin-right: 8px; min-width: 80px; }
+.dark .ai-md .kpi { background: rgba(23,23,23,0.06); }
+.ai-md .kpi__value { font-size: 17px; font-weight: 600; line-height: 1; color: rgba(255,255,255,0.95); }
+.dark .ai-md .kpi__value { color: rgba(23,23,23,0.92); }
+.ai-md .kpi__label { font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.04em; color: rgba(255,255,255,0.5); margin-top: 3px; }
+.dark .ai-md .kpi__label { color: rgba(23,23,23,0.5); }
+.ai-md svg { max-width: 100%; height: auto; }
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  background: transparent;
+  overflow: hidden;
+  font-family: system-ui, -apple-system, 'Segoe UI', Inter, sans-serif;
+  color: rgba(255, 255, 255, 0.92);
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* When the system is in dark mode the prompt box flips to white glass,
+   so the inherited body colour must flip to dark too. Anything that
+   doesn't set its own colour now inherits a readable foreground in both
+   modes instead of staying white-on-white. */
+html.dark,
+html.dark body,
+html.dark #root {
+  color: rgba(23, 23, 23, 0.92);
+}
+
+input,
+textarea {
+  -webkit-user-select: text;
+  user-select: text;
+}
