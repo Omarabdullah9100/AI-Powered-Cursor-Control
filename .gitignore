@@ -215,3 +215,4 @@ landingpage/assets/video/*.webm
 landingpage/assets/img/*.gif
 docs/
 landingpage/
+electron-builder.local.yml
