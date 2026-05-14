@@ -216,3 +216,4 @@ landingpage/assets/img/*.gif
 docs/
 landingpage/
 electron-builder.local.yml
+scripts/

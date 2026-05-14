@@ -98,22 +98,21 @@ npm run dist:linux      # Linux .AppImage (x64)
 npm run dist            # all three on supported hosts
 ```
 
-The release pipeline lives in `scripts/release-build.sh`. It builds every requested platform, computes SHA-512 (hex, not base64), writes `latest.json` for the auto-updater, and stages everything for FTP upload with a printable checklist.
-
-Signing and notarisation are wired in `electron-builder.yml`. Export your Apple credentials before running:
+For signed and notarised macOS builds, set your Apple credentials in the environment before running:
 
 ```bash
 export APPLE_ID="you@example.com"
 export APPLE_TEAM_ID="ABCDE12345"
 export APPLE_APP_SPECIFIC_PASSWORD="xxxx-xxxx-xxxx-xxxx"
-./scripts/release-build.sh 1.0.0 --mac
+export CSC_IDENTITY="Your Name (ABCDE12345)"
+npm run dist:mac
 ```
 
-Pass `--no-sign` or `--no-notarize` to skip either step for local testing.
+Without Apple credentials, electron-builder produces unsigned builds suitable for local testing.
 
 ## Tech stack
 
-Electron 30 · React 18 · TypeScript 5 · Tailwind 3 · Framer Motion · Vite 5 · `uiohook-napi` (global key + mouse hook) · `sharp` (image processing) · `electron-store` + Electron `safeStorage` (config + secret storage) · `react-markdown` with `rehype-sanitize` · native `fetch` (no SDK dependency on any LLM provider).
+Electron 30 · React 18 · TypeScript 5 · Tailwind 3 · Framer Motion · Vite 5 · `uiohook-napi` (global key + mouse hook) · Electron's `nativeImage` (cursor-region screenshots, no native image library) · `electron-store` + Electron `safeStorage` (config + secret storage) · `react-markdown` with `rehype-sanitize` · native `fetch` (no SDK dependency on any LLM provider).
 
 ## What it isn't
 

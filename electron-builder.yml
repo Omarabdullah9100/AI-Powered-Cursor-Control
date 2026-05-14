@@ -6,7 +6,7 @@
 # via --no-sign / --no-notarize. Required env vars for a signed + notarized
 # macOS build:
 #   APPLE_ID                      Apple ID email (e.g. dev@example.com)
-#   APPLE_TEAM_ID                 10-char team id (e.g. Q5ASU2DB6P)
+#   APPLE_TEAM_ID                 10-char team id (e.g. YOUR_TEAM_ID)
 #   APPLE_APP_SPECIFIC_PASSWORD   app-specific password from appleid.apple.com
 #   CSC_LINK                      path or base64 of the Developer ID p12
 #   CSC_KEY_PASSWORD              p12 password
@@ -74,7 +74,7 @@ mac:
   entitlementsInherit: build/entitlements.mac.plist
   # Use the project's Developer ID Application identity. The full identity
   # string is what `security find-identity -v -p codesigning` prints.
-  identity: "Mario Simic (Q5ASU2DB6P)"
+  identity: "${env.CSC_IDENTITY}"
   # Notarization is opt-in via env. When APPLE_ID and
   # APPLE_APP_SPECIFIC_PASSWORD are present electron-builder uploads the
   # signed app to Apple for notarization and staples the ticket back. When

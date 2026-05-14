@@ -1,9 +1,18 @@
 import { desktopCapturer, screen } from 'electron';
-import sharp from 'sharp';
 
 const CROP_W = 1024;
 const CROP_H = 768;
 const JPEG_QUALITY = 80;
+
+// All cropping + JPEG encoding goes through Electron's built-in `nativeImage`
+// (Skia under the hood). Earlier versions used `sharp` for this, which pulled
+// in libvips as a native binding — fine on macOS where we built locally, but
+// a permanent thorn for cross-platform CI: the Windows/Linux artefacts of
+// `sharp` weren't always copied into the asar-unpacked node_modules, and
+// distributed builds would crash with "Cannot find module sharp" or a libvips
+// load error. `nativeImage` is part of Electron itself, so it ships with the
+// runtime by definition. No native modules to rebuild, no platform-specific
+// binaries to package, no asarUnpack entries.
 
 export async function captureAroundCursor(cursor: { x: number; y: number }): Promise<string> {
   const display = screen.getDisplayNearestPoint(cursor);
@@ -46,9 +55,8 @@ export async function captureAroundCursor(cursor: { x: number; y: number }): Pro
     );
   }
 
-  const buffer = thumb.toPNG();
   const size = thumb.getSize();
-  console.log('[screenshot] thumb size', size, 'png bytes', buffer.length);
+  console.log('[screenshot] thumb size', size);
 
   const localX = cursor.x - display.bounds.x;
   const localY = cursor.y - display.bounds.y;
@@ -60,15 +68,13 @@ export async function captureAroundCursor(cursor: { x: number; y: number }): Pro
   console.log('[screenshot] crop', { left, top, cropW, cropH });
 
   try {
-    const cropped = await sharp(buffer)
-      .extract({ left, top, width: cropW, height: cropH })
-      .jpeg({ quality: JPEG_QUALITY, mozjpeg: true })
-      .toBuffer();
-    console.log('[screenshot] cropped jpeg bytes', cropped.length);
-    return cropped.toString('base64');
+    const cropped = thumb.crop({ x: left, y: top, width: cropW, height: cropH });
+    const jpegBuf = cropped.toJPEG(JPEG_QUALITY);
+    console.log('[screenshot] cropped jpeg bytes', jpegBuf.length);
+    return jpegBuf.toString('base64');
   } catch (e) {
-    console.error('[screenshot] sharp crop failed', e);
-    throw new Error(`Sharp crop failed: ${e instanceof Error ? e.message : String(e)}`);
+    console.error('[screenshot] crop failed', e);
+    throw new Error(`Crop failed: ${e instanceof Error ? e.message : String(e)}`);
   }
 }
 
@@ -110,7 +116,6 @@ export async function captureRectFromDisplay(
     throw new Error('Screen capture returned empty.');
   }
 
-  const buffer = thumb.toPNG();
   const size = thumb.getSize();
 
   // The renderer reports rect in work-area coords (the overlay window covers
@@ -125,15 +130,13 @@ export async function captureRectFromDisplay(
   console.log('[screenshot] rect-crop', { left, top, width, height });
 
   try {
-    const cropped = await sharp(buffer)
-      .extract({ left, top, width, height })
-      .jpeg({ quality: JPEG_QUALITY, mozjpeg: true })
-      .toBuffer();
-    console.log('[screenshot] rect-cropped jpeg bytes', cropped.length);
-    return cropped.toString('base64');
+    const cropped = thumb.crop({ x: left, y: top, width, height });
+    const jpegBuf = cropped.toJPEG(JPEG_QUALITY);
+    console.log('[screenshot] rect-cropped jpeg bytes', jpegBuf.length);
+    return jpegBuf.toString('base64');
   } catch (e) {
-    console.error('[screenshot] sharp rect-crop failed', e);
-    throw new Error(`Sharp crop failed: ${e instanceof Error ? e.message : String(e)}`);
+    console.error('[screenshot] rect-crop failed', e);
+    throw new Error(`Crop failed: ${e instanceof Error ? e.message : String(e)}`);
   }
 }
 
