@@ -36,6 +36,7 @@ files:
   - package.json
   - "!node_modules/**/*"
   - "node_modules/uiohook-napi/**/*"
+  - "node_modules/node-gyp-build/**/*"
   - "node_modules/sharp/**/*"
   - "node_modules/@img/**/*"
   - "node_modules/electron-store/**/*"
@@ -46,6 +47,7 @@ files:
 asar: true
 asarUnpack:
   - "node_modules/uiohook-napi/**/*"
+  - "node_modules/node-gyp-build/**/*"
   - "node_modules/sharp/**/*"
   - "node_modules/@img/**/*"
 
