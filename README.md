@@ -10,15 +10,6 @@
 
 <br>
 
-<a href="https://youtu.be/NRIlG32hvLg">
-  <img src="https://img.youtube.com/vi/NRIlG32hvLg/maxresdefault.jpg" alt="AICursor demo" width="720">
-</a>
-
-<br>
-<sub><a href="https://youtu.be/NRIlG32hvLg">▶ Watch the demo on YouTube</a></sub>
-
-<br>
-
 </div>
 
 ---
