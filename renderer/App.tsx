@@ -384,7 +384,7 @@ export function App() {
         setOverrideResponse(
           `## Provenance
 
-**AIPointer** is original work by **Mario Simic** ([github.com/talentsache](https://github.com/talentsache)).
+**AICursor** is our collaborative AI cursor assistant.
 
 - Version: **1.0.0**
 - Tagged: **2026-05-13**
@@ -658,7 +658,7 @@ This command is not listed in \`/help\` or in autocomplete. It exists as a recor
             error={displayError}
             webOnDefault={webOnDefault}
             audioMode={!!settings?.audioMode}
-            lastPrompt={overrideResponse ? 'AIPointer · help' : lastPrompt}
+            lastPrompt={overrideResponse ? 'AICursor · help' : lastPrompt}
             lastWasWeb={lastWasWeb}
             activities={overrideResponse ? [] : activities}
             approvals={overrideResponse ? [] : approvals}
@@ -687,13 +687,13 @@ This command is not listed in \`/help\` or in autocomplete. It exists as a recor
       {needsAccessibility && (
         <PermissionsBanner
           message="Accessibility permission required"
-          hint="System Settings was opened. Grant access, then quit AIPointer and relaunch."
+          hint="System Settings was opened. Grant access, then quit AICursor and relaunch."
         />
       )}
       {!needsAccessibility && needsScreenRecording && (
         <PermissionsBanner
           message="Screen Recording permission required"
-          hint="System Settings was opened. Grant access, then quit AIPointer and relaunch."
+          hint="System Settings was opened. Grant access, then quit AICursor and relaunch."
         />
       )}
 

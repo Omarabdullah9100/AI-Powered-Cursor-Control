@@ -69,7 +69,7 @@ async function testOpenRouter(apiKey: string): Promise<ProviderTestResult> {
       headers: {
         Authorization: `Bearer ${apiKey}`,
         'HTTP-Referer': 'https://aipointer.app',
-        'X-Title': 'AIPointer',
+        'X-Title': 'AICursor',
       },
     });
     if (res.status === 401 || res.status === 403) {
@@ -137,6 +137,24 @@ async function testGemini(apiKey: string): Promise<ProviderTestResult> {
     if (res.status === 400 || res.status === 401 || res.status === 403) {
       return { ok: false, error: 'Invalid API key' };
     }
+
+    if (res.status >= 400) {
+      return { ok: false, error: `HTTP ${res.status}` };
+    }
+    return { ok: true, label: 'connected' };
+  } catch (err) {
+    return { ok: false, error: err instanceof Error ? err.message : 'Network error' };
+  }
+}
+
+async function testDeepSeek(apiKey: string): Promise<ProviderTestResult> {
+  try {
+    const res = await request('https://api.deepseek.com/models', {
+      headers: { Authorization: `Bearer ${apiKey}` },
+    });
+    if (res.status === 401 || res.status === 403) {
+      return { ok: false, error: 'Invalid API key' };
+    }
     if (res.status >= 400) {
       return { ok: false, error: `HTTP ${res.status}` };
     }
@@ -161,5 +179,7 @@ export async function testProviderKey(
       return testOpenAI(trimmed);
     case 'gemini':
       return testGemini(trimmed);
+    case 'deepseek':
+      return testDeepSeek(trimmed);
   }
 }

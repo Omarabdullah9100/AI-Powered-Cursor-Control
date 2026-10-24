@@ -5,7 +5,7 @@ import type { LinkMeta } from '../types';
 
 const FETCH_TIMEOUT_MS = 8000;
 const MAX_HTML_BYTES = 512_000;
-const USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) AIPointer/1.0 Safari/605.1.15';
+const USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) AICursor/1.0 Safari/605.1.15';
 
 // SSRF guard: same allow-list as fetch-url. Reject loopback / private /
 // link-local / cloud-metadata destinations so a malicious URL passed by the

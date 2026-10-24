@@ -41,7 +41,7 @@ export async function captureAroundCursor(cursor: { x: number; y: number }): Pro
 
   if (sources.length === 0) {
     throw new Error(
-      'No screen sources returned. Screen Recording permission missing. Quit AIPointer, grant the permission in System Settings, then relaunch.',
+      'No screen sources returned. Screen Recording permission missing. Quit AICursor, grant the permission in System Settings, then relaunch.',
     );
   }
 
@@ -51,7 +51,7 @@ export async function captureAroundCursor(cursor: { x: number; y: number }): Pro
   const thumb = source.thumbnail;
   if (thumb.isEmpty()) {
     throw new Error(
-      'Screen capture returned empty. Screen Recording permission missing or not yet inherited. Quit AIPointer and relaunch after granting.',
+      'Screen capture returned empty. Screen Recording permission missing or not yet inherited. Quit AICursor and relaunch after granting.',
     );
   }
 

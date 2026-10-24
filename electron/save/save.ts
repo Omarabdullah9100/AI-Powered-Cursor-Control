@@ -35,7 +35,7 @@ function defaultFilename(prompt: string, ext: string): string {
     .slice(0, 60)
     .toLowerCase();
   const stamp = new Date().toISOString().slice(0, 10);
-  return `aipointer-${stamp}-${cleaned || 'response'}.${ext}`;
+  return `aicursor-${stamp}-${cleaned || 'response'}.${ext}`;
 }
 
 async function ensureWorkspace(folder: string): Promise<void> {
@@ -56,7 +56,7 @@ export async function saveResponse(opts: {
 
   const result = await withOverlaysLowered(() =>
     dialog.showSaveDialog({
-      title: 'Save AIPointer response',
+      title: 'Save AICursor response',
       defaultPath: join(workspace, defaultFilename(opts.prompt, 'html')),
       filters: [
         { name: 'HTML (styled, A4 print-ready)', extensions: ['html'] },

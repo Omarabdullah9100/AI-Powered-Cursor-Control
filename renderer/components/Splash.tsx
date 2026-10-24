@@ -73,7 +73,7 @@ export function Splash({ enabled, onDismiss }: Props) {
                 }}
               >
                 <span className="text-accent">AI</span>
-                <span className="text-white dark:text-white">Pointer</span>
+                <span className="text-white dark:text-white">Cursor</span>
               </h1>
               <motion.p
                 initial={{ opacity: 0 }}

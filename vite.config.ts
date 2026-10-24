@@ -9,7 +9,7 @@ import { resolve } from 'node:path';
 // through a sanitizer bypass plus an https: wildcard.
 //
 // Provider hosts listed here cover OpenRouter, Anthropic, OpenAI, Gemini, and
-// the AIPointer update channel. Adding a new provider means updating this
+// the AICursor update channel. Adding a new provider means updating this
 // list. The dev CSP in renderer/index.html is permissive enough to keep Vite
 // HMR working; this build-time replacement only fires in production builds.
 const PROD_CONNECT_SRC = [

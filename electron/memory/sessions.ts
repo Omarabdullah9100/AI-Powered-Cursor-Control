@@ -191,7 +191,7 @@ function turnsToMarkdown(_firstPrompt: string, turns: SessionTurn[]): string {
     lines.push('');
     lines.push(`> ${t.user.replace(/\n/g, '\n> ')}`);
     lines.push('');
-    lines.push('**AIPointer:**');
+    lines.push('**AICursor:**');
     lines.push('');
     lines.push(t.assistant);
     lines.push('');

@@ -1,14 +1,14 @@
-import type { AIPointerAPI } from '../../electron/types';
+import type { AICursorAPI } from '../../electron/types';
 
-function getApi(): AIPointerAPI {
+function getApi(): AICursorAPI {
   if (typeof window === 'undefined' || !window.aipointer) {
     throw new Error('window.aipointer is not available. Preload script did not load.');
   }
   return window.aipointer;
 }
 
-export const ipc = new Proxy<AIPointerAPI>({} as AIPointerAPI, {
-  get(_t, prop: keyof AIPointerAPI) {
+export const ipc = new Proxy<AICursorAPI>({} as AICursorAPI, {
+  get(_t, prop: keyof AICursorAPI) {
     return getApi()[prop];
   },
 });

@@ -28,7 +28,7 @@ async function fetchManifest(url: string, hop = 0): Promise<UpdateManifest> {
       reject(new Error(`Feed must be https (got ${target.protocol})`));
       return;
     }
-    const ua = `AIPointer/${app.getVersion()} (${process.platform}-${process.arch})`;
+    const ua = `AICursor/${app.getVersion()} (${process.platform}-${process.arch})`;
     const req = request(
       target,
       {

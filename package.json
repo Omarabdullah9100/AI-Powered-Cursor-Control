@@ -1,7 +1,7 @@
 {
-  "name": "aipointer",
+  "name": "aicursor",
   "version": "1.0.0",
-  "description": "AI-aware cursor companion for macOS, Windows, Linux. Hold a key, ask a question, get an answer about whatever your cursor is pointing at.",
+  "description": "AI-aware cursor companion for macOS, Windows, and Linux. Hold a key, ask a question, and get an answer about whatever your cursor is pointing at.",
   "license": "MIT",
   "author": "Mario Simic",
   "homepage": "https://aipointer.app",

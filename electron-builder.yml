@@ -1,5 +1,5 @@
 # electron-builder.yml
-# AIPointer v1.0.0 packaging config.
+# AICursor v1.0.0 packaging config.
 # Docs: https://www.electron.build/configuration/configuration
 #
 # Sign / notarize are env-gated. The release-build.sh script can also override
@@ -17,7 +17,7 @@
 # slot. See https://www.electron.build/configuration/mac
 
 appId: app.aipointer.macos
-productName: AIPointer
+productName: AICursor
 copyright: Copyright (c) 2026 Mario Simic
 
 compression: normal
@@ -51,7 +51,7 @@ asarUnpack:
   - "node_modules/sharp/**/*"
   - "node_modules/@img/**/*"
 
-# AIPointer hosts its own update channel. The custom updater in
+# AICursor hosts its own update channel. The custom updater in
 # electron/updater/ reads aipointer.app/updates/latest.json. The yml files
 # emitted by the release script are forward-compat for electron-updater.
 publish:
@@ -61,7 +61,7 @@ publish:
 # ── macOS ─────────────────────────────────────────────────────────────────
 mac:
   category: public.app-category.productivity
-  artifactName: "AIPointer-${version}-${arch}.${ext}"
+  artifactName: "AICursor-${version}-${arch}.${ext}"
   target:
     - target: dmg
       arch: [arm64, x64]
@@ -90,15 +90,15 @@ mac:
     CFBundleVersion: "1.0.0"
     # Dock-hidden accessory app. The tray icon is the only visible affordance.
     LSUIElement: true
-    NSScreenCaptureUsageDescription: "AIPointer captures a small region around your cursor when you trigger AI mode. The image is sent only to the AI provider you configured."
-    NSAccessibilityUsageDescription: "AIPointer needs Accessibility access to detect when you hold the trigger key from anywhere on your system."
-    NSMicrophoneUsageDescription: "AIPointer uses the microphone for voice input. Recordings are sent to your configured AI provider for transcription and are not stored locally."
-    NSAppleEventsUsageDescription: "AIPointer uses Apple Events to coordinate the system tray menu."
-    NSCameraUsageDescription: "AIPointer does not use the camera."
+    NSScreenCaptureUsageDescription: "AICursor captures a small region around your cursor when you trigger AI mode. The image is sent only to the AI provider you configured."
+    NSAccessibilityUsageDescription: "AICursor needs Accessibility access to detect when you hold the trigger key from anywhere on your system."
+    NSMicrophoneUsageDescription: "AICursor uses the microphone for voice input. Recordings are sent to your configured AI provider for transcription and are not stored locally."
+    NSAppleEventsUsageDescription: "AICursor uses Apple Events to coordinate the system tray menu."
+    NSCameraUsageDescription: "AICursor does not use the camera."
 
 # ── Windows ───────────────────────────────────────────────────────────────
 win:
-  artifactName: "AIPointer-Setup-${version}.${ext}"
+  artifactName: "AICursor-Setup-${version}.${ext}"
   target:
     - target: nsis
       arch: [x64]
@@ -115,12 +115,12 @@ nsis:
   installerHeaderIcon: assets/icon.ico
   createDesktopShortcut: true
   createStartMenuShortcut: true
-  shortcutName: AIPointer
-  uninstallDisplayName: AIPointer
+  shortcutName: AICursor
+  uninstallDisplayName: AICursor
 
 # ── Linux ─────────────────────────────────────────────────────────────────
 linux:
-  artifactName: "AIPointer-${version}-${arch}.${ext}"
+  artifactName: "AICursor-${version}-${arch}.${ext}"
   target:
     - target: AppImage
       arch: [x64]
@@ -131,7 +131,7 @@ linux:
   synopsis: "AI cursor companion"
   description: "AI-aware cursor companion. Hold a key, ask a question, get an answer about whatever your cursor is pointing at."
   desktop:
-    Name: AIPointer
+    Name: AICursor
     Comment: AI cursor companion
     Categories: Utility;Development;
 

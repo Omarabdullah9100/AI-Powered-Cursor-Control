@@ -50,7 +50,7 @@ export type ToolApprovalRequest = {
   args: Record<string, unknown>;
 };
 
-export type ProviderId = 'openrouter' | 'anthropic' | 'openai' | 'gemini';
+export type ProviderId = 'openrouter' | 'anthropic' | 'openai' | 'gemini' | 'deepseek';
 
 export type UserProfile = {
   name: string;
@@ -91,7 +91,7 @@ export type Settings = {
   // Auto-update check on launch + once per 24h. Manual "Check for updates"
   // in the tray menu works regardless of this setting. Default on.
   autoCheckUpdates: boolean;
-  // Voice-first mode. When on, triggering AIPointer auto-starts the
+  // Voice-first mode. When on, triggering AICursor auto-starts the
   // microphone, the transcript auto-submits, and the response gets read
   // back via TTS so the user can run a hands-free conversation loop. Off
   // by default — voice is still available manually via the mic icon.
@@ -148,7 +148,7 @@ export type PermissionsStatus = {
   screenRecording: boolean;
 };
 
-export type AIPointerAPI = {
+export type AICursorAPI = {
   onAIModeStart: (cb: (pos: CursorPosition) => void) => () => void;
   onAIModeEnd: (cb: () => void) => () => void;
   onCursorPosition: (cb: (pos: CursorPosition) => void) => () => void;
@@ -247,6 +247,6 @@ export type AIPointerAPI = {
 
 declare global {
   interface Window {
-    aipointer: AIPointerAPI;
+    aipointer: AICursorAPI;
   }
 }

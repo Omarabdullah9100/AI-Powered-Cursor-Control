@@ -1,7 +1,7 @@
 import type { Message } from '../prompt';
 import type { ToolDeclaration } from '../tools';
 
-export type ProviderId = 'openrouter' | 'anthropic' | 'openai' | 'gemini';
+export type ProviderId = 'openrouter' | 'anthropic' | 'openai' | 'gemini' | 'deepseek';
 
 export type ModelCapability = 'vision' | 'tools' | 'web';
 
@@ -72,8 +72,8 @@ export interface ProviderClient {
 
 export const HTTP_HEADERS_BASE = {
   'HTTP-Referer': 'https://aipointer.app',
-  'X-Title': 'AIPointer',
-  'User-Agent': 'AIPointer/1.0.0 (https://aipointer.app)',
+  'X-Title': 'AICursor',
+  'User-Agent': 'AICursor/1.0.0 (https://aipointer.app)',
 } as const;
 
 export class ProviderHttpError extends Error {

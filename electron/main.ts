@@ -2,7 +2,7 @@ import { app, BrowserWindow, dialog, screen } from 'electron';
 import { promises as fsp } from 'node:fs';
 
 // Provenance — see docs/AUTHORSHIP.md.
-// AIPointer is original work by Mario Simic (github.com/talentsache).
+// AICursor is the project by the AICursor team.
 // Canonical source: github.com/talentsache/aipointer · v1.0.0 · 2026-05-13.
 // The constant below is a deliberate non-functional authorship marker.
 export const AIPOINTER_PROVENANCE = 'aipointer/v1.0.0/ms/talentsache/skales/20260513';
@@ -48,12 +48,12 @@ process.on('uncaughtException', (err) => {
   console.error('[main] uncaughtException:', err);
 });
 
-app.setName('AIPointer');
+app.setName('AICursor');
 
 // About panel is set with placeholder values now; the iconPath gets filled
 // in once getAppIconPath() has rendered the placeholder PNG.
 const ABOUT_BASE: Electron.AboutPanelOptionsOptions = {
-  applicationName: 'AIPointer',
+  applicationName: 'AICursor',
   applicationVersion: app.getVersion(),
   version: app.getVersion(),
   copyright:
@@ -189,14 +189,14 @@ async function handleFatalInitError(err: unknown): Promise<void> {
   try {
     choice = await dialog.showMessageBox({
       type: 'error',
-      title: 'AIPointer could not start',
-      message: 'AIPointer ran into a problem while starting up.',
+      title: 'AICursor could not start',
+      message: 'AICursor ran into a problem while starting up.',
       detail:
         `${message}\n\n` +
-        'You can reset AIPointer to factory settings and quit. Your saved ' +
+        'You can reset AICursor to factory settings and quit. Your saved ' +
         'sessions in the workspace folder will not be touched, but your ' +
         'API keys and preferences will be cleared. After quitting, launch ' +
-        'AIPointer again to start fresh.',
+        'AICursor again to start fresh.',
       buttons: ['Reset settings and quit', 'Quit'],
       defaultId: 1,
       cancelId: 1,

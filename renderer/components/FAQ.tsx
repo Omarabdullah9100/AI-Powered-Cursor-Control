@@ -8,7 +8,7 @@ type FAQItem = {
 
 const FAQ_ITEMS: FAQItem[] = [
   {
-    q: 'How do I invoke AIPointer?',
+    q: 'How do I invoke AICursor?',
     a: (
       <>
         Hold <kbd>Right-Cmd</kbd> for 200ms over the content you want to ask
@@ -33,10 +33,10 @@ const FAQ_ITEMS: FAQItem[] = [
     q: 'How do I save an answer?',
     a: (
       <>
-        After AIPointer answers, hover the response and click <b>Save</b>.
+        After AICursor answers, hover the response and click <b>Save</b>.
         Choose <b>HTML</b> (A4-styled, ready to print to PDF), <b>PDF</b>, or
         <b> Markdown</b>. The default workspace folder is{' '}
-        <code>~/Documents/AIPointer</code> — change it in the Workspace
+        <code>~/Documents/AICursor</code> — change it in the Workspace
         section above.
       </>
     ),
@@ -50,7 +50,7 @@ const FAQ_ITEMS: FAQItem[] = [
         <code>/brief</code>, <code>/translate</code>, <code>/explain</code>,{' '}
         <code>/code</code>, <code>/improve</code>, <code>/settings</code>,{' '}
         <code>/help</code>, <code>/clear</code>, <code>/quit</code>. You can
-        also just type the request in plain language — AIPointer auto-routes
+        also just type the request in plain language — AICursor auto-routes
         intent.
       </>
     ),
@@ -62,7 +62,7 @@ const FAQ_ITEMS: FAQItem[] = [
         Screenshots (1024×768 region around your cursor) and any clipboard
         text you don't dismiss go only to the LLM provider you configured —
         nowhere else. No telemetry, no analytics, no auto-updater. The config
-        file is stored locally and obfuscation-encrypted. AIPointer is open
+        file is stored locally and obfuscation-encrypted. AICursor is open
         source; verify yourself at{' '}
         <a
           href="#"
@@ -82,8 +82,8 @@ const FAQ_ITEMS: FAQItem[] = [
     q: 'What if my provider fails?',
     a: (
       <>
-        AIPointer auto-falls-back to the next enabled provider in the fixed
-        priority order: OpenRouter → Anthropic → OpenAI → Google Gemini. Retry
+        AICursor auto-falls-back to the next enabled provider in the fixed
+        priority order: OpenRouter → Anthropic → OpenAI → Google Gemini → DeepSeek. Retry
         triggers on 408 / 429 / 5xx errors and on auth errors so a stale key
         in slot 1 still lets slot 2 answer.
       </>
@@ -93,7 +93,7 @@ const FAQ_ITEMS: FAQItem[] = [
     q: 'Tools and approvals?',
     a: (
       <>
-        AIPointer ships six tools: <code>fetch_url</code> (read a page),{' '}
+        AICursor ships six tools: <code>fetch_url</code> (read a page),{' '}
         <code>open_url</code> (open in browser), <code>copy_to_clipboard</code>,{' '}
         <code>save_document</code>, <code>reveal_in_finder</code>,{' '}
         <code>read_clipboard</code>. Read-only tools run automatically. Action
@@ -106,7 +106,7 @@ const FAQ_ITEMS: FAQItem[] = [
     q: 'Voice input?',
     a: (
       <>
-        Click the microphone icon in the prompt. Speak. AIPointer auto-stops
+        Click the microphone icon in the prompt. Speak. AICursor auto-stops
         ~1.5s after you fall silent, transcribes via your preferred provider
         (Gemini direct → OpenAI Whisper → OpenRouter), and fills the input.
         You can then edit and press Enter.
@@ -118,7 +118,7 @@ const FAQ_ITEMS: FAQItem[] = [
     a: (
       <>
         Turn on <b>Voice-first conversation mode</b> in Behaviour. Triggering
-        AIPointer then opens the box already listening: speak your question,
+        AICursor then opens the box already listening: speak your question,
         the transcript auto-submits, the answer is read back aloud, and the
         mic re-opens for a follow-up. A small phase pill at the top of the
         box shows you which leg of the loop you're in
@@ -142,22 +142,22 @@ const FAQ_ITEMS: FAQItem[] = [
     ),
   },
   {
-    q: 'What does AIPointer actually "see"?',
+    q: 'What does AICursor actually "see"?',
     a: (
       <>
         At trigger time it takes <b>one</b> JPEG screenshot of the display
         under your cursor (1024×768 default, or your drag-rectangle if you
         used the region gesture). It also reads your current clipboard text
         — if you don't want that, click the X on the clipboard chip in the
-        box and AIPointer will skip clipboard until you copy something new.
+        box and AICursor will skip clipboard until you copy something new.
         Multi-turn follow-ups in the same session reuse the original
-        screenshot (no re-capture of AIPointer's own box). Nothing else is
+        screenshot (no re-capture of AICursor's own box). Nothing else is
         recorded.
       </>
     ),
   },
   {
-    q: 'What can AIPointer do on its own (tools)?',
+    q: 'What can AICursor do on its own (tools)?',
     a: (
       <>
         The model can decide mid-answer to use one of six tools:
@@ -178,7 +178,7 @@ const FAQ_ITEMS: FAQItem[] = [
     q: 'Multi-display: where does the box appear?',
     a: (
       <>
-        AIPointer creates an invisible overlay on every connected display.
+        AICursor creates an invisible overlay on every connected display.
         When you trigger, the halo and prompt box appear on whichever display
         the cursor is on. Drag the box wherever you want — it stays within
         that display. Settings always opens on your primary display.
@@ -201,7 +201,7 @@ const FAQ_ITEMS: FAQItem[] = [
     q: 'How do I uninstall? Where is data stored?',
     a: (
       <>
-        Drag <code>AIPointer.app</code> to Trash (macOS) or uninstall from
+        Drag <code>AICursor.app</code> to Trash (macOS) or uninstall from
         Programs (Windows / Linux). Per-user data lives at{' '}
         <code>~/Library/Application Support/aipointer</code> (macOS) /{' '}
         <code>%APPDATA%/aipointer</code> (Windows) / <code>~/.config/aipointer</code>{' '}

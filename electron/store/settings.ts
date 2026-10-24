@@ -95,13 +95,14 @@ const DEFAULT_PROVIDERS: Record<ProviderId, ProviderSettings> = {
   anthropic: { apiKey: '', enabled: false },
   openai: { apiKey: '', enabled: false },
   gemini: { apiKey: '', enabled: false },
+  deepseek: { apiKey: '', enabled: false },
 };
 
 const defaultWorkspace = (): string => {
   try {
-    return join(app.getPath('documents'), 'AIPointer');
+    return join(app.getPath('documents'), 'AICursor');
   } catch {
-    return join(process.env.HOME ?? '/tmp', 'AIPointer');
+    return join(process.env.HOME ?? '/tmp', 'AICursor');
   }
 };
 

@@ -9,10 +9,10 @@ const MAX_OUTPUT_CHARS = 6_000;
 const MAX_REDIRECTS = 5;
 
 // Generic Chrome User-Agent per platform. We intentionally do NOT advertise
-// AIPointer in the UA: the tool fetches arbitrary user-requested URLs, and
-// fingerprinting the user's traffic to those servers as "AIPointer user"
+// AICursor in the UA: the tool fetches arbitrary user-requested URLs, and
+// fingerprinting the user's traffic to those servers as "AICursor user"
 // would leak the fact that they use this app to every site visited. Provider
-// API calls (OpenAI, Anthropic, etc.) still send the AIPointer UA because
+// API calls (OpenAI, Anthropic, etc.) still send the AICursor UA because
 // those are the user's chosen service relationships where attribution is
 // appropriate.
 function chromeUserAgent(): string {

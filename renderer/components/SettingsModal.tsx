@@ -95,6 +95,16 @@ const PROVIDERS: ProviderMeta[] = [
     keyPlaceholder: 'AIza…',
     getKey: 'aistudio.google.com/apikey',
   },
+  {
+    id: 'deepseek',
+    name: 'DeepSeek',
+    defaultModel: 'deepseek-flash',
+    capableModel: 'deepseek-flash',
+    caps: { vision: true, tools: true, web: false },
+    keyPlaceholder: 'sk-…',
+    keyPrefix: 'sk-',
+    getKey: 'platform.deepseek.com/api_keys',
+  },
 ];
 
 const CAPABILITIES = [
@@ -118,12 +128,14 @@ export function SettingsModal({ initial, onClose, onSaved }: Props) {
     anthropic: { apiKey: '', enabled: false },
     openai: { apiKey: '', enabled: false },
     gemini: { apiKey: '', enabled: false },
+    deepseek: { apiKey: '', enabled: false },
   });
   const [showKeys, setShowKeys] = useState<Record<ProviderId, boolean>>({
     openrouter: false,
     anthropic: false,
     openai: false,
     gemini: false,
+    deepseek: false,
   });
   // Per-provider test state: idle (no test run yet for the current key),
   // testing (request in flight), ok with optional label (e.g. "$3.42 left"
@@ -140,12 +152,14 @@ export function SettingsModal({ initial, onClose, onSaved }: Props) {
     anthropic: { status: 'idle' },
     openai: { status: 'idle' },
     gemini: { status: 'idle' },
+    deepseek: { status: 'idle' },
   });
   const [testedKey, setTestedKey] = useState<Record<ProviderId, string>>({
     openrouter: '',
     anthropic: '',
     openai: '',
     gemini: '',
+    deepseek: '',
   });
   const [webSearch, setWebSearch] = useState(false);
   const [autoApproveTools, setAutoApproveTools] = useState(false);
@@ -182,6 +196,7 @@ export function SettingsModal({ initial, onClose, onSaved }: Props) {
         anthropic: { apiKey: '', enabled: false },
         openai: { apiKey: '', enabled: false },
         gemini: { apiKey: '', enabled: false },
+        deepseek: { apiKey: '', enabled: false },
       };
     const baseUserProfile =
       initial?.userProfile ?? { name: '', role: '', preferredLanguage: '' };
@@ -389,7 +404,7 @@ export function SettingsModal({ initial, onClose, onSaved }: Props) {
             </span>
             <div>
               <h1 className="text-[15px] font-semibold tracking-tight text-white dark:text-neutral-900">
-                AIPointer
+                AICursor
               </h1>
               <p className="text-[11px] text-white/50 dark:text-neutral-900/55">
                 Settings · v{version} ·{' '}
@@ -415,7 +430,7 @@ export function SettingsModal({ initial, onClose, onSaved }: Props) {
           {/* PROVIDERS */}
           <Section
             title="Providers"
-            subtitle="OpenRouter is tried first — it routes to the cheapest, fastest model. Direct provider keys are used as automatic fallback in the listed order. You don't pick models, AIPointer does."
+            subtitle="OpenRouter is tried first — it routes to the cheapest, fastest model. Direct provider keys are used as automatic fallback in the listed order. You don't pick models, AICursor does."
           >
             <div className="flex flex-col gap-3">
               {PROVIDERS.map((meta, i) => {
@@ -530,7 +545,7 @@ export function SettingsModal({ initial, onClose, onSaved }: Props) {
           </Section>
 
           {/* BEHAVIOUR */}
-          <Section title="Behaviour" subtitle="How AIPointer responds and asks for permission.">
+          <Section title="Behaviour" subtitle="How AICursor responds and asks for permission.">
             <div className="flex flex-col gap-2">
               <ToggleRow
                 label="Web search on every query"
@@ -552,7 +567,7 @@ export function SettingsModal({ initial, onClose, onSaved }: Props) {
               />
               <ToggleRow
                 label="Voice-first conversation mode"
-                hint="When on, triggering AIPointer opens the box already listening — speak, the transcript auto-submits, the answer is read back, and the mic auto-reopens for a follow-up. Hands-free. ESC stops the loop at any time. Microphone permission is required."
+                hint="When on, triggering AICursor opens the box already listening — speak, the transcript auto-submits, the answer is read back, and the mic auto-reopens for a follow-up. Hands-free. ESC stops the loop at any time. Microphone permission is required."
                 checked={audioMode}
                 onChange={setAudioMode}
               />
@@ -566,7 +581,7 @@ export function SettingsModal({ initial, onClose, onSaved }: Props) {
             <div className="flex flex-col gap-2">
               <ToggleRow
                 label="Save sessions to workspace"
-                hint="On dismiss, AIPointer writes a JSON transcript + a styled HTML version to <workspace>/sessions/. Off by default — nothing is written to disk."
+                hint="On dismiss, AICursor writes a JSON transcript + a styled HTML version to <workspace>/sessions/. Off by default — nothing is written to disk."
                 checked={memorySaveEnabled}
                 onChange={setMemorySaveEnabled}
               />
@@ -645,7 +660,7 @@ export function SettingsModal({ initial, onClose, onSaved }: Props) {
           </Section>
 
           {/* WORKSPACE */}
-          <Section title="Workspace" subtitle="Where AIPointer suggests saving documents.">
+          <Section title="Workspace" subtitle="Where AICursor suggests saving documents.">
             <div className="flex gap-2">
               <div
                 className={[
@@ -754,7 +769,7 @@ export function SettingsModal({ initial, onClose, onSaved }: Props) {
                       Trigger hotkey
                     </div>
                     <div className="mt-0.5 text-[11px] text-white/55 dark:text-neutral-900/60">
-                      Hold for 200ms anywhere on your system to invoke AIPointer over what your cursor is on.
+                      Hold for 200ms anywhere on your system to invoke AICursor over what your cursor is on.
                     </div>
                   </div>
                   <SelectField
@@ -821,7 +836,7 @@ export function SettingsModal({ initial, onClose, onSaved }: Props) {
 
           <Section
             title="Updates"
-            subtitle="AIPointer can check aipointer.app/updates/latest.json for new versions. Manual checks via the tray menu work regardless of this setting."
+            subtitle="AICursor can check aipointer.app/updates/latest.json for new versions. Manual checks via the tray menu work regardless of this setting."
           >
             <ToggleRow
               label="Auto-check for updates"
@@ -831,33 +846,23 @@ export function SettingsModal({ initial, onClose, onSaved }: Props) {
             />
           </Section>
 
-          {/* ABOUT */}
-          <Section title="About" subtitle="">
+          {/* PROJECT ABOUT */}
+          <Section title="About AICursor" subtitle="Our project team">
             <div className="space-y-4">
-              <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[12px] text-white/75 dark:text-neutral-900/80">
-                <button
-                  type="button"
-                  onClick={() => void ipc.openExternal('https://github.com/talentsache')}
-                  className="text-accent/90 hover:text-accent"
-                >
-                  Built by Mario Simic ↗
-                </button>
-                <span className="opacity-30">·</span>
-                <button
-                  type="button"
-                  onClick={() => void ipc.openExternal('https://github.com/talentsache/aipointer')}
-                  className="text-accent/90 hover:text-accent"
-                >
-                  github.com/talentsache/aipointer ↗
-                </button>
-                <span className="opacity-30">·</span>
-                <button
-                  type="button"
-                  onClick={() => void ipc.openExternal('https://aipointer.app')}
-                  className="text-accent/90 hover:text-accent"
-                >
-                  aipointer.app ↗
-                </button>
+              <div className="rounded-lg border border-white/8 bg-white/3 p-3.5 dark:border-neutral-900/10 dark:bg-neutral-900/3">
+                <p className="text-[11.5px] leading-relaxed text-white/70 dark:text-neutral-900/70">
+                  AICursor is an AI-powered cursor companion designed to help you understand and
+                  interact with the content around your cursor.
+                </p>
+                <p className="mt-3 text-[11px] font-semibold uppercase tracking-wider text-accent">
+                  Project team
+                </p>
+                <ul className="mt-2 grid grid-cols-1 gap-1 text-[12px] text-white/80 dark:text-neutral-900/80 sm:grid-cols-2">
+                  <li>Omar Abdullah K A</li>
+                  <li>Pranav Jayan</li>
+                  <li>Varunsankar J</li>
+                  <li>Zeba Saithalavi</li>
+                </ul>
               </div>
 
               <div
@@ -869,26 +874,26 @@ export function SettingsModal({ initial, onClose, onSaved }: Props) {
               >
                 <p className="text-[11.5px] leading-relaxed text-white/60 dark:text-neutral-900/65">
                   <span className="font-semibold text-white/85 dark:text-neutral-900">Privacy.</span>{' '}
-                  AIPointer collects nothing. There is no telemetry, no analytics, no tracking.
-                  AIPointer does not send any data to aipointer.app servers (the only contact with
+                  AICursor collects nothing. There is no telemetry, no analytics, no tracking.
+                  AICursor does not send any data to aipointer.app servers (the only contact with
                   that domain is the optional update check, which fetches a small JSON manifest and
                   carries no user data).
                 </p>
                 <p className="mt-2 text-[11.5px] leading-relaxed text-white/60 dark:text-neutral-900/65">
                   When you use AI features, the following data is sent to your chosen AI provider
-                  (OpenRouter, Anthropic, OpenAI, or Google Gemini), and only to that provider:
+                  (OpenRouter, Anthropic, OpenAI, Google Gemini, or DeepSeek), and only to that provider:
                   your typed or spoken prompt, a screenshot of the area around your cursor, the
                   current clipboard contents if used as context, voice recordings if you use voice
-                  input (for transcription), text you ask AIPointer to read aloud if you use TTS,
+                  input (for transcription), text you ask AICursor to read aloud if you use TTS,
                   and your name, role, and language only if "Personalize prompts" is enabled in
                   the Profile section above.
                 </p>
                 <p className="mt-2 text-[11.5px] leading-relaxed text-white/60 dark:text-neutral-900/65">
-                  Each provider has its own privacy policy. AIPointer cannot guarantee how a
+                  Each provider has its own privacy policy. AICursor cannot guarantee how a
                   provider handles your data once it leaves your device. Choose your provider
                   accordingly. Tool actions (web search, page fetch, document save, open URL, copy
                   to clipboard, reveal in Finder) run locally on your machine under your system
-                  permissions and require your explicit approval. AIPointer is open-source under
+                  permissions and require your explicit approval. AICursor is open-source under
                   the MIT license. You are responsible for the queries you make, the costs
                   incurred on your provider account, and any actions you authorise. Provided
                   as-is, without warranty.
@@ -905,7 +910,7 @@ export function SettingsModal({ initial, onClose, onSaved }: Props) {
               </div>
 
               <div className="flex items-center justify-between text-[10.5px] text-white/45 dark:text-neutral-900/45">
-                <span>AIPointer v{version} · MIT · Open source · No telemetry</span>
+                <span>AICursor v{version} · MIT · Open source · No telemetry</span>
                 <button
                   type="button"
                   onClick={() => void ipc.openExternal('https://skales.app')}

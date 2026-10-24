@@ -37,7 +37,7 @@ export const COMMANDS: readonly Command[] = [
   { id: 'history', name: '/history', description: 'List past sessions (workspace)', group: 'action' },
   { id: 'help', name: '/help', description: 'Show available commands', group: 'action' },
   { id: 'clear', name: '/clear', description: 'Dismiss the current response', group: 'action' },
-  { id: 'quit', name: '/quit', description: 'Quit AIPointer', group: 'action' },
+  { id: 'quit', name: '/quit', description: 'Quit AICursor', group: 'action' },
 ];
 
 export type ParsedCommand = {
@@ -111,15 +111,15 @@ export const HELP_TEXT = `## Commands
 - \`/history\` — list past sessions saved to your workspace.
 - \`/clear\` — dismiss the current response.
 - \`/help\` — this list.
-- \`/quit\` — quit AIPointer.
+- \`/quit\` — quit AICursor.
 
-## What AIPointer sees
-At trigger, AIPointer captures **one** screenshot — by default a 1024×768 region centred on your cursor. It also reads your current **clipboard** text (dismiss with the X on the chip to skip).
+## What AICursor sees
+At trigger, AICursor captures **one** screenshot — by default a 1024×768 region centred on your cursor. It also reads your current **clipboard** text (dismiss with the X on the chip to skip).
 - **Region screenshots:** while the box is open, hold the trigger key a second time and drag a rectangle. That region replaces the default crop.
-- **Multi-turn:** follow-up questions in the same session reuse the original screenshot — AIPointer never re-captures itself.
+- **Multi-turn:** follow-up questions in the same session reuse the original screenshot — AICursor never re-captures itself.
 - **Live clipboard:** copying new text (Cmd+C) while the box is open updates the chip within ~½ second.
 
-## What AIPointer can do
+## What AICursor can do
 The model can call tools mid-answer:
 - \`fetch_url\`, \`read_clipboard\` — read-only, run automatically
 - \`open_url\`, \`copy_to_clipboard\`, \`save_document\`, \`reveal_in_finder\` — destructive, ask before running
@@ -133,4 +133,4 @@ Web search via \`/web <question>\` or auto-detected from intent.
 - Double-click outside the box → dismiss (switchable to single-click in Settings → Behaviour).
 
 ## Privacy
-No telemetry, no analytics, no background calls. Everything routes through the LLM provider you configured. Open source at github.com/talentsache/aipointer.`;
+No telemetry, no analytics, no background calls. Everything routes through the LLM provider you configured. Open source as AICursor.`;

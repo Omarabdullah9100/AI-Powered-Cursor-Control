@@ -38,7 +38,7 @@ async function streamToFile(
       reject(new Error(`Refusing non-https asset: ${target.protocol}`));
       return;
     }
-    const ua = `AIPointer/${app.getVersion()} (${process.platform}-${process.arch})`;
+    const ua = `AICursor/${app.getVersion()} (${process.platform}-${process.arch})`;
     const startedAt = Date.now();
     let transferred = 0;
     const file = createWriteStream(destPath);

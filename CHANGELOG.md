@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to AIPointer are documented here. Format loosely follows
+All notable changes to AICursor are documented here. Format loosely follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
@@ -79,9 +79,9 @@ agentic, voice-enabled AI cursor companion.
   constraints.
 - **User profile** in settings (name + role + preferred reply language) gets
   inlined into the system prompt for personalised replies.
-- **System tray** with branded entries: Trigger AIPointer, Settings,
+- **System tray** with branded entries: Trigger AICursor, Settings,
   Privacy Policy, Check for updates, Install update (contextual, appears
-  only when a download is pending), About AIPointer v1.0.0,
+  only when a download is pending), About AICursor v1.0.0,
   Open aipointer.app, Open GitHub repo, Built by Mario Simic,
   Powered by Skales, Quit.
 - **Privacy Policy link** in the Settings About disclaimer, opening
@@ -151,7 +151,7 @@ agentic, voice-enabled AI cursor companion.
   Supports `--mac`, `--win`, `--linux`, `--no-sign`, `--no-notarize`.
 - `electron-builder.yml` rewritten with hardened-runtime entitlements,
   Developer ID Application identity, conditional notarization gated on
-  the Apple env vars, and a `publish.url` pointing at the AIPointer
+  the Apple env vars, and a `publish.url` pointing at the AICursor
   update channel.
 - Build entitlements extended with `allow-jit`, `allow-unsigned-executable-memory`,
   `allow-dyld-environment-variables`, `disable-library-validation`,
@@ -194,8 +194,8 @@ agentic, voice-enabled AI cursor companion.
   policy in `renderer/index.html` for Vite HMR; production is injected by
   a `transformIndexHtml` plugin at build time.
 - `fetch_url` tool now sends a generic Chrome User-Agent per platform so
-  fetched pages cannot fingerprint that the request came from AIPointer.
-  Provider API calls keep the AIPointer UA where attribution is
+  fetched pages cannot fingerprint that the request came from AICursor.
+  Provider API calls keep the AICursor UA where attribution is
   appropriate.
 - Tool output wrapping: removed the heuristic regex array that prepended
   a warning header when output "looked like injection". The delimiters
@@ -281,7 +281,7 @@ agentic, voice-enabled AI cursor companion.
   cancels cleanly without dismissing the box. Multi-display aware — the rect's
   display-local coords convert through `display.workArea` offsets.
 - **Voice-first conversation mode** (Settings → Behaviour, default off). When
-  on, triggering AIPointer opens the box already listening: VAD-stopped
+  on, triggering AICursor opens the box already listening: VAD-stopped
   transcript auto-submits, the response is read back via TTS, the mic
   re-opens for the next turn. A compact phase pill below the drag handle
   shows the current leg (Listening → Thinking → Speaking → Done · say a
@@ -310,10 +310,10 @@ agentic, voice-enabled AI cursor companion.
 - **Tray-menu cleanup.** Removed the "Toggle DevTools" entry (only useful for
   developers; end users shouldn't see it). DevTools remain accessible via
   `Cmd+Opt+I` when needed.
-- **/help expanded** with sections on "What AIPointer sees" (screenshot +
-  clipboard + region awareness), "What AIPointer can do" (tools with auto vs
+- **/help expanded** with sections on "What AICursor sees" (screenshot +
+  clipboard + region awareness), "What AICursor can do" (tools with auto vs
   approval markers), "Gestures" (full keyboard/mouse map), and "Privacy".
-- **FAQ expanded** with 8 new entries: region screenshots, what AIPointer
+- **FAQ expanded** with 8 new entries: region screenshots, what AICursor
   sees, tool capabilities, multi-display behaviour, power/perf impact,
   uninstall paths, keyboard shortcuts, voice-first mode.
 

@@ -39,7 +39,7 @@ export async function showAboutWindow(): Promise<void> {
     minimizable: false,
     maximizable: false,
     fullscreenable: false,
-    title: 'About AIPointer',
+    title: 'About AICursor',
     backgroundColor: '#0c0c0d',
     show: false,
     titleBarStyle: process.platform === 'darwin' ? 'hiddenInset' : 'default',
@@ -91,7 +91,7 @@ function renderAboutHtml(iconUrl: string, version: string): string {
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>About AIPointer</title>
+<title>About AICursor</title>
 <style>
   :root {
     --bg: #0c0c0d;
@@ -224,9 +224,9 @@ function renderAboutHtml(iconUrl: string, version: string): string {
 </head>
 <body>
   <div class="icon-wrap">
-    ${iconUrl ? `<img class="icon" src="${iconUrl}" alt="AIPointer">` : ''}
+    ${iconUrl ? `<img class="icon" src="${iconUrl}" alt="AICursor">` : ''}
   </div>
-  <h1><span class="ai">AI</span>Pointer</h1>
+  <h1><span class="ai">AI</span>Cursor</h1>
   <div class="ver">Version ${version} · MIT licensed</div>
   <div class="desc">
     AI-aware cursor companion for macOS, Windows, Linux. Hold a key, ask a question, get an answer about whatever your cursor is pointing at.
@@ -234,12 +234,12 @@ function renderAboutHtml(iconUrl: string, version: string): string {
   <div class="links">
     <a href="https://aipointer.app" target="_blank" rel="noreferrer">aipointer.app</a>
     <a href="https://github.com/talentsache/aipointer" target="_blank" rel="noreferrer">github.com/talentsache/aipointer</a>
-    <a href="https://github.com/talentsache" target="_blank" rel="noreferrer">Built by Mario Simic</a>
+    <span>Project team: Omar Abdullah K A · Pranav Jayan · Varunsankar J · Zeba Saithalavi</span>
   </div>
   <div class="footer">
     No telemetry · No analytics · No cloud · <a href="https://skales.app" target="_blank" rel="noreferrer">Powered by Skales</a>
   </div>
-  <div class="copyright">© 2026 Mario Simic</div>
+  <div class="copyright">© 2026 AICursor project team</div>
   <!-- Hidden authorship marker (paired with the .ms-aipointer-authentic Tailwind utility). -->
   <span class="ms-aipointer-authentic" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;">aipointer/v1.0.0/ms/talentsache/skales/20260513</span>
 </body>

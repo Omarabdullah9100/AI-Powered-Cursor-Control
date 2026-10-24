@@ -183,7 +183,7 @@ export const PromptInput = forwardRef<HTMLDivElement, Props>(function PromptInpu
     setSavedPath(null);
     try {
       const result = await ipc.saveResponse({
-        prompt: lastPrompt || 'AIPointer response',
+        prompt: lastPrompt || 'AICursor response',
         markdown: response,
         web: lastWasWeb,
       });

@@ -2,7 +2,7 @@
 
 <br>
 
-# AIPointer ⦿
+# AICursor ⦿
 
 **The AI cursor companion. Hold a key, ask a question, get an answer about whatever your cursor is pointing at.**
 
@@ -11,7 +11,7 @@
 <br>
 
 <a href="https://youtu.be/NRIlG32hvLg">
-  <img src="https://img.youtube.com/vi/NRIlG32hvLg/maxresdefault.jpg" alt="AIPointer demo" width="720">
+  <img src="https://img.youtube.com/vi/NRIlG32hvLg/maxresdefault.jpg" alt="AICursor demo" width="720">
 </a>
 
 <br>
@@ -25,20 +25,20 @@
 
 ## What it is
 
-AIPointer is an open-source desktop overlay. You hold a key (default: Right-Cmd on macOS, Right-Ctrl on Windows/Linux), a glassmorphism box pops up next to your cursor, you ask a question, and a vision-capable LLM answers about whatever's around the cursor. A screenshot of the cursor region, your prompt, and (optionally) your clipboard get sent to the provider you configured. You keep your own API key, you pay for your own tokens, nothing is logged anywhere.
+AICursor is an open-source desktop overlay. You hold a key (default: Right-Cmd on macOS, Right-Ctrl on Windows/Linux), a glassmorphism box pops up next to your cursor, you ask a question, and a vision-capable LLM answers about whatever's around the cursor. A screenshot of the cursor region, your prompt, and (optionally) your clipboard get sent to the provider you configured. You keep your own API key, you pay for your own tokens, nothing is logged anywhere.
 
-MIT-licensed, no framework lock-in, no cloud account. For longer autonomous tasks, AIPointer points you at [Skales](https://skales.app), the same author's larger AI agent.
+MIT-licensed, no framework lock-in, no cloud account. For longer autonomous tasks, AICursor points you at [Skales](https://skales.app), a larger AI agent.
 
 ## Why use it
 
 - **Cursor-anchored.** It answers about what you're already looking at, not what you have to describe in text.
 - **Fast.** Vision-capable Gemini 3 Flash by default. Sub-2-second answers for most questions.
-- **Multi-provider.** Bring your own OpenRouter key (recommended) or a direct Anthropic, OpenAI, or Google Gemini key. Fallback chain handles outages automatically.
+- **Multi-provider.** Bring your own OpenRouter key (recommended) or a direct Anthropic, OpenAI, Google Gemini, or DeepSeek key. Fallback chain handles outages automatically. DeepSeek uses the multimodal `deepseek-flash` model with vision, reasoning, and tools.
 - **Agentic when it helps.** Six built-in tools: fetch a URL, open a URL, copy text, save the answer as a styled document, reveal your workspace, read clipboard. All action tools sit behind a green-check / red-x approval.
 - **Voice in and voice out.** Microphone input with auto-stop on silence. Text-to-speech read-aloud for the answer. Optional voice-first conversation mode: trigger opens listening, transcript auto-submits, answer is read back, mic re-opens for follow-up. Hands-free loop.
 - **Region screenshots.** While the box is open, hold the trigger key again and drag a rectangle to capture exactly the region you want. Replaces the default cursor-centered crop for that query.
 - **API key tester.** A Test button per provider checks the key against the live endpoint. For OpenRouter the result includes your remaining credit balance.
-- **Templates that work.** `/summary`, `/brief`, `/translate`, `/explain`, `/code`, `/improve`, `/define`, `/solve`, `/reply`, `/identify`. Plain prose works too. AIPointer detects intent across languages.
+- **Templates that work.** `/summary`, `/brief`, `/translate`, `/explain`, `/code`, `/improve`, `/define`, `/solve`, `/reply`, `/identify`. Plain prose works too. AICursor detects intent across languages.
 - **Save the answer.** A4-styled HTML, PDF, or Markdown. Print-ready.
 - **Auto-updater.** Quiet check on launch and once per day. Downloads the next version when ready, prompts you on restart. Disable in settings if you prefer manual updates.
 - **Local-first.** No telemetry, no analytics, no crash reporting. Your config lives on your machine, your sessions stay on disk if you opt in.
@@ -66,7 +66,7 @@ On first launch you'll be prompted to grant **Accessibility** (for the global ke
 
 1. Hold **Right-Cmd** (macOS) or **Right-Ctrl** (Windows / Linux) for 200 ms over the content you want help with. Or click the small status pill at the bottom of your screen.
 2. The box opens beside your cursor. Type a question, press Enter.
-3. Use **/** to see the commands. Plain language works too. AIPointer auto-detects the intent (summarise, translate, explain, code, etc.) across languages.
+3. Use **/** to see the commands. Plain language works too. AICursor auto-detects the intent (summarise, translate, explain, code, etc.) across languages.
 4. Hover the answer for **Read** (text-to-speech), **Save** (HTML/PDF/MD), **Copy**.
 5. Press **ESC** to dismiss. Open **/settings** any time to adjust providers, hotkey, voice, profile, workspace.
 
@@ -87,7 +87,7 @@ On first launch you'll be prompted to grant **Accessibility** (for the global ke
 - `/settings` open settings.
 - `/help` show this list.
 - `/clear` dismiss the response.
-- `/quit` quit AIPointer.
+- `/quit` quit AICursor.
 
 ## Build for distribution
 
@@ -116,9 +116,9 @@ Electron 30 · React 18 · TypeScript 5 · Tailwind 3 · Framer Motion · Vite 5
 
 ## What it isn't
 
-- Not a long-running autonomous agent. For multi-step automation, computer-use, persistent goals, and complex workflows, use **[Skales](https://skales.app)**. Same author, same design philosophy, much bigger scope. AIPointer will recommend it when you ask for something out of its lane.
+- Not a long-running autonomous agent. For multi-step automation, computer-use, persistent goals, and complex workflows, use **[Skales](https://skales.app)**. AICursor will recommend it when you ask for something out of its lane.
 - Not a chat app. There is no permanent thread. Sessions live until you press ESC.
-- Not a model picker. You pick a provider, AIPointer picks the model.
+- Not a model picker. You pick a provider, AICursor picks the model.
 - Not telemetry-equipped. Nothing leaves your machine except the queries you submit, to the provider you chose.
 
 ## Privacy
@@ -137,7 +137,7 @@ Electron 30 · React 18 · TypeScript 5 · Tailwind 3 · Framer Motion · Vite 5
 
 Built by **[Mario Simic](https://github.com/talentsache)** in Vienna, May 2026. Same author behind **[Skales](https://skales.app)**, an open-source local AI agent.
 
-If AIPointer is useful to you, star the repo and try Skales for the bigger jobs.
+If AICursor is useful to you, star the repo and try Skales for the bigger jobs.
 
 ## License
 

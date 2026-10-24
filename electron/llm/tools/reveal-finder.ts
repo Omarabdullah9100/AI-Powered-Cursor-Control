@@ -21,7 +21,7 @@ export const revealInFinderTool: ToolDefinition = {
     function: {
       name: 'reveal_in_finder',
       description:
-        'Open the AIPointer workspace folder in the OS file manager (Finder on macOS, Explorer on Windows). Use when the user asks to "open my workspace", "show me my saved files", or "where are my docs".',
+        'Open the AICursor workspace folder in the OS file manager (Finder on macOS, Explorer on Windows). Use when the user asks to "open my workspace", "show me my saved files", or "where are my docs".',
       parameters: {
         type: 'object',
         properties: {

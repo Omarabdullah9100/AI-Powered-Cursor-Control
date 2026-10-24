@@ -10,7 +10,7 @@ export async function createTray(): Promise<void> {
   if (tray) return;
   const icon = await getTrayIcon();
   tray = new Tray(icon);
-  tray.setToolTip('AIPointer');
+  tray.setToolTip('AICursor');
   rebuildMenu();
   // Rebuild the menu whenever the updater state changes so "Install update"
   // appears the moment a download completes and disappears after install.
@@ -35,7 +35,7 @@ export function rebuildMenu(): void {
 
   const items: Electron.MenuItemConstructorOptions[] = [
     {
-      label: 'Trigger AIPointer',
+      label: 'Trigger AICursor',
       accelerator: 'CmdOrCtrl+Shift+A',
       click: () => triggerAIModeFromMenu(),
     },
@@ -76,7 +76,7 @@ export function rebuildMenu(): void {
   items.push(
     { type: 'separator' },
     {
-      label: `About AIPointer v${app.getVersion()}`,
+      label: `About AICursor v${app.getVersion()}`,
       click: () => void showAboutWindow(),
     },
     {
@@ -97,7 +97,7 @@ export function rebuildMenu(): void {
     },
     { type: 'separator' },
     {
-      label: 'Quit AIPointer',
+      label: 'Quit AICursor',
       accelerator: 'CmdOrCtrl+Q',
       click: () => app.quit(),
     },

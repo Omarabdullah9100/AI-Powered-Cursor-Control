@@ -17,7 +17,7 @@ export function installAndRelaunch(installerPath: string): void {
     throw new Error('Installer path missing or no longer exists');
   }
   if (process.platform === 'win32') {
-    // NSIS one-click installer. /S = silent. --force-run reopens AIPointer
+    // NSIS one-click installer. /S = silent. --force-run reopens AICursor
     // after the install finishes. detached so the child outlives us.
     const child = spawn(installerPath, ['/S', '--force-run'], {
       detached: true,

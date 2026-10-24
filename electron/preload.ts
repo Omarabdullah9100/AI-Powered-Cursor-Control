@@ -1,6 +1,6 @@
 import { contextBridge, ipcRenderer } from 'electron';
 import type {
-  AIPointerAPI,
+  AICursorAPI,
   ClipboardContext,
   CursorPosition,
   LLMChunk,
@@ -20,7 +20,7 @@ function on<T>(channel: string, cb: (payload: T) => void): () => void {
   return () => ipcRenderer.removeListener(channel, listener);
 }
 
-const api: AIPointerAPI = {
+const api: AICursorAPI = {
   onAIModeStart: (cb) => on<CursorPosition>('ai-mode:start', cb),
   onAIModeEnd: (cb) => on<void>('ai-mode:end', () => cb()),
   onCursorPosition: (cb) => on<CursorPosition>('cursor:position', cb),

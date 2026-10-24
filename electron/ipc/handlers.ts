@@ -221,7 +221,7 @@ export function registerIpcHandlers(): void {
 
     // First turn of a new session: needs the screenshot from the trigger.
     // Subsequent turns reuse the same screenshot (the actual screen is now
-    // partially covered by AIPointer itself, so recapturing would be wrong).
+    // partially covered by AICursor itself, so recapturing would be wrong).
     if (!activeSession) {
       let imageB64: string;
       if (pendingScreenshot) {
@@ -269,7 +269,7 @@ export function registerIpcHandlers(): void {
     //  - later turns: existing messages + new user(text only)
     // Re-read the clipboard on each submit so that copying text (Cmd+C)
     // while the box is open is picked up — the user can highlight text in
-    // another app and ask AIPointer about it without restarting the session.
+    // another app and ask AICursor about it without restarting the session.
     // BUT: if the user clicked the X on the chip and the clipboard hasn't
     // changed since, treat it as empty for this turn. Otherwise dismissing
     // would only hide the chip visually while still leaking the text to the
@@ -402,7 +402,7 @@ export function registerIpcHandlers(): void {
   ipcMain.handle(CHANNELS.PickWorkspaceFolder, async () => {
     const result = await withOverlaysLowered(() =>
       dialog.showOpenDialog({
-        title: 'Choose AIPointer workspace folder',
+        title: 'Choose AICursor workspace folder',
         defaultPath: getSettings().workspaceFolder,
         properties: ['openDirectory', 'createDirectory'],
         buttonLabel: 'Choose folder',

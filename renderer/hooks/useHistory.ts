@@ -30,7 +30,7 @@ export function formatHistoryMarkdown(sessions: SessionSummary[]): string {
 
 You haven't saved any sessions yet.
 
-Turn on **Save sessions to workspace** in \`/settings\` → Memory to start recording your AIPointer conversations as JSON + styled HTML files in \`<workspace>/sessions/\`.`;
+Turn on **Save sessions to workspace** in \`/settings\` → Memory to start recording your AICursor conversations as JSON + styled HTML files in \`<workspace>/sessions/\`.`;
   }
   const lines: string[] = ['## Recent sessions', ''];
   sessions.slice(0, 20).forEach((s) => {

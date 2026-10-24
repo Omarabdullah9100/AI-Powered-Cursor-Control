@@ -41,7 +41,7 @@ export const saveDocumentTool: ToolDefinition = {
       .replace(/[\x00-\x1F<>:"|?*]/g, '')
       .slice(0, 80)
       .trim();
-    const promptForName = suggested || ctx.originalPrompt || 'AIPointer response';
+    const promptForName = suggested || ctx.originalPrompt || 'AICursor response';
     const result = await saveResponse({
       prompt: promptForName,
       markdown,

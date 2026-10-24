@@ -43,7 +43,7 @@ export const BottomPill = forwardRef<HTMLDivElement, Props>(function BottomPill(
           'dark:border-neutral-900/15 dark:bg-white dark:text-neutral-900/85',
           expanded ? 'gap-2 rounded-full px-3.5 py-1.5' : 'h-6 w-6 justify-center rounded-full p-0',
         ].join(' ')}
-        aria-label="Trigger AIPointer"
+        aria-label="Trigger AICursor"
       >
         <motion.span
           layout="position"
@@ -63,7 +63,7 @@ export const BottomPill = forwardRef<HTMLDivElement, Props>(function BottomPill(
               transition={{ duration: 0.18, ease: 'easeOut' }}
               className="flex items-center gap-2 whitespace-nowrap text-[11px]"
             >
-              <span className="font-medium tracking-wide text-white dark:text-neutral-900">AIPointer</span>
+              <span className="font-medium tracking-wide text-white dark:text-neutral-900">AICursor</span>
               <span className="opacity-75">
                 {hasKey ? 'hold Right-Cmd · click here' : 'no API key · /settings'}
               </span>

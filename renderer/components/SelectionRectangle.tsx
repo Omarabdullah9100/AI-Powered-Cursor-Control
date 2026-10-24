@@ -10,7 +10,7 @@ type Props = {
 // Visual rectangle the user is drawing while drag-selecting a custom
 // screenshot region. Sits on top of the click-through overlay so it doesn't
 // obstruct the underlying app being framed. Style is intentionally restrained
-// (translucent fill, soft glow, lime-green border to match the AIPointer
+// (translucent fill, soft glow, lime-green border to match the AICursor
 // accent) so the user sees exactly what's being captured without the rect
 // itself dominating the screenshot they're about to make.
 export function SelectionRectangle({ x, y, width, height }: Props) {

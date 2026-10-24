@@ -76,7 +76,7 @@ export function streamCompletion(
     const chain = resolveProviderChain();
     if (chain.length === 0) {
       handlers.onError(
-        'No provider configured. Type /settings to add an OpenRouter, Anthropic, OpenAI, or Google Gemini key.',
+        'No provider configured. Type /settings to add an OpenRouter, Anthropic, OpenAI, Google Gemini, or DeepSeek key.',
       );
       return;
     }
@@ -107,7 +107,7 @@ export function streamCompletion(
     const profile = personalize ? getSettings().userProfile : null;
     const profileLine =
       profile && (profile.name || profile.role || profile.preferredLanguage)
-        ? `# User profile\nThe person using AIPointer is${profile.name ? ` ${profile.name}` : ''}${
+        ? `# User profile\nThe person using AICursor is${profile.name ? ` ${profile.name}` : ''}${
             profile.role ? `, a ${profile.role}` : ''
           }${
             profile.preferredLanguage

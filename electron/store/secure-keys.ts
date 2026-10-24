@@ -96,7 +96,7 @@ export function encryptProviders(
 export function decryptProviders(
   enc: SecureProviderMap | null | undefined,
 ): Record<ProviderId, ProviderSettings> {
-  const ids: ProviderId[] = ['openrouter', 'anthropic', 'openai', 'gemini'];
+  const ids: ProviderId[] = ['openrouter', 'anthropic', 'openai', 'gemini', 'deepseek'];
   const out = {} as Record<ProviderId, ProviderSettings>;
   for (const id of ids) {
     const e = enc?.[id];

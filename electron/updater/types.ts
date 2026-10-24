@@ -52,7 +52,7 @@ export function platformKey(): PlatformKey | null {
 
 // Dependency-free semver compare. Returns >0 if a > b, <0 if a < b, 0 equal.
 // Handles "1.0.0", "1.0.0-beta.2", "1.0.0+build". Pre-release suffixes count
-// as lower than the same version without one. Good enough for the AIPointer
+// as lower than the same version without one. Good enough for the AICursor
 // release cadence; full RFC compliance not needed.
 export function compareVersions(a: string, b: string): number {
   const parse = (v: string) => {
