@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <!--
+    Hardened runtime entitlements. These three are required by Electron /
+    V8 to run at all under a hardened-runtime + notarized signature.
+  -->
+  <key>com.apple.security.cs.allow-jit</key>
+  <true/>
+  <key>com.apple.security.cs.allow-unsigned-executable-memory</key>
+  <true/>
+  <key>com.apple.security.cs.allow-dyld-environment-variables</key>
+  <true/>
+  <!--
+    Library validation needs to be disabled so native modules signed by
+    other identities (sharp's libvips, uiohook-napi's input library) can
+    load alongside the AIPointer binary signed by Mario's Developer ID.
+  -->
+  <key>com.apple.security.cs.disable-library-validation</key>
+  <true/>
+
+  <!--
+    Microphone access. Voice input feature in the renderer calls
+    navigator.mediaDevices.getUserMedia({ audio: true }). The recording is
+    sent only to the configured AI provider for transcription and never
+    persisted. Required even though TCC also gates it because hardened
+    runtime + notarization enforces entitlement presence.
+  -->
+  <key>com.apple.security.device.audio-input</key>
+  <true/>
+
+  <!--
+    Apple Events. Needed so the tray menu's "Open System Settings" path
+    can target the right pane on modern macOS. Without this entitlement
+    the call falls through silently under hardened runtime.
+  -->
+  <key>com.apple.security.automation.apple-events</key>
+  <true/>
+
+  <!--
+    Camera is intentionally false. AIPointer does not use the camera.
+    Leaving the key present with false makes the negative explicit so a
+    future entitlements diff catches an accidental flip.
+  -->
+  <key>com.apple.security.device.camera</key>
+  <false/>
+</dict>
+</plist>

@@ -1,0 +1,145 @@
+# electron-builder.yml
+# AICursor v1.0.0 packaging config.
+# Docs: https://www.electron.build/configuration/configuration
+#
+# Sign / notarize are env-gated. The release-build.sh script can also override
+# via --no-sign / --no-notarize. Required env vars for a signed + notarized
+# macOS build:
+#   APPLE_ID                      Apple ID email (e.g. dev@example.com)
+#   APPLE_TEAM_ID                 10-char team id (e.g. YOUR_TEAM_ID)
+#   APPLE_APP_SPECIFIC_PASSWORD   app-specific password from appleid.apple.com
+#   CSC_LINK                      path or base64 of the Developer ID p12
+#   CSC_KEY_PASSWORD              p12 password
+# If any of the Apple env vars are missing, electron-builder still signs (if
+# CSC_LINK is present) but skips notarization. If CSC_LINK is also missing
+# the build runs unsigned. That is the right behaviour for fast local dev
+# iterations: re-running unsigned should never burn an Apple notarization
+# slot. See https://www.electron.build/configuration/mac
+
+appId: app.aipointer.macos
+productName: AICursor
+copyright: Copyright (c) 2026 Mario Simic
+
+compression: normal
+
+directories:
+  output: release
+  buildResources: build
+
+# Renderer is packed from vite's dist/. Electron main + preload come from
+# dist-electron/ (see vite.config.ts). Only the runtime-required native
+# modules are kept under node_modules to stay small; sharp + uiohook-napi
+# must be `asarUnpack`ed because they include compiled .node addons.
+files:
+  - dist/**/*
+  - dist-electron/**/*
+  - package.json
+  - "!node_modules/**/*"
+  - "node_modules/uiohook-napi/**/*"
+  - "node_modules/node-gyp-build/**/*"
+  - "node_modules/sharp/**/*"
+  - "node_modules/@img/**/*"
+  - "node_modules/electron-store/**/*"
+  - "!**/*.map"
+  - "!**/*.bak"
+  - "!**/*-backup"
+
+asar: true
+asarUnpack:
+  - "node_modules/uiohook-napi/**/*"
+  - "node_modules/node-gyp-build/**/*"
+  - "node_modules/sharp/**/*"
+  - "node_modules/@img/**/*"
+
+# AICursor hosts its own update channel. The custom updater in
+# electron/updater/ reads aipointer.app/updates/latest.json. The yml files
+# emitted by the release script are forward-compat for electron-updater.
+publish:
+  provider: generic
+  url: https://aipointer.app/updates/
+
+# ── macOS ─────────────────────────────────────────────────────────────────
+mac:
+  category: public.app-category.productivity
+  artifactName: "AICursor-${version}-${arch}.${ext}"
+  target:
+    - target: dmg
+      arch: [arm64, x64]
+    - target: zip
+      arch: [arm64, x64]
+  icon: assets/icon.png
+  hardenedRuntime: true
+  gatekeeperAssess: false
+  entitlements: build/entitlements.mac.plist
+  entitlementsInherit: build/entitlements.mac.plist
+  # Use the project's Developer ID Application identity. The full identity
+  # string is what `security find-identity -v -p codesigning` prints.
+  identity: "${env.CSC_IDENTITY}"
+  # Notarization is opt-in via env. When APPLE_ID and
+  # APPLE_APP_SPECIFIC_PASSWORD are present electron-builder uploads the
+  # signed app to Apple for notarization and staples the ticket back. When
+  # they are missing notarization is silently skipped. The Apple team id is
+  # picked up from APPLE_TEAM_ID. Setting `notarize: true` here unconditionally
+  # would error out without the env vars; the conditional is handled by
+  # electron-builder >=24 when the legacy `notarize: false` is set: signed
+  # build succeeds, no notarization attempt is made.
+  notarize: false
+  extendInfo:
+    NSHumanReadableCopyright: "Copyright (c) 2026 Mario Simic. All rights reserved."
+    CFBundleShortVersionString: "1.0.0"
+    CFBundleVersion: "1.0.0"
+    # Dock-hidden accessory app. The tray icon is the only visible affordance.
+    LSUIElement: true
+    NSScreenCaptureUsageDescription: "AICursor captures a small region around your cursor when you trigger AI mode. The image is sent only to the AI provider you configured."
+    NSAccessibilityUsageDescription: "AICursor needs Accessibility access to detect when you hold the trigger key from anywhere on your system."
+    NSMicrophoneUsageDescription: "AICursor uses the microphone for voice input. Recordings are sent to your configured AI provider for transcription and are not stored locally."
+    NSAppleEventsUsageDescription: "AICursor uses Apple Events to coordinate the system tray menu."
+    NSCameraUsageDescription: "AICursor does not use the camera."
+
+# ── Windows ───────────────────────────────────────────────────────────────
+win:
+  artifactName: "AICursor-Setup-${version}.${ext}"
+  target:
+    - target: nsis
+      arch: [x64]
+  icon: assets/icon.ico
+  # Code signing is opt-in via CSC_LINK / CSC_KEY_PASSWORD in the environment.
+  # Without those, electron-builder produces an unsigned NSIS installer.
+
+nsis:
+  oneClick: true
+  perMachine: false
+  allowToChangeInstallationDirectory: false
+  installerIcon: assets/icon.ico
+  uninstallerIcon: assets/icon.ico
+  installerHeaderIcon: assets/icon.ico
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: AICursor
+  uninstallDisplayName: AICursor
+
+# ── Linux ─────────────────────────────────────────────────────────────────
+linux:
+  artifactName: "AICursor-${version}-${arch}.${ext}"
+  target:
+    - target: AppImage
+      arch: [x64]
+  icon: assets/icon.png
+  category: Utility
+  maintainer: "Mario Simic <dev@mariosimic.at>"
+  vendor: "Mario Simic"
+  synopsis: "AI cursor companion"
+  description: "AI-aware cursor companion. Hold a key, ask a question, get an answer about whatever your cursor is pointing at."
+  desktop:
+    Name: AICursor
+    Comment: AI cursor companion
+    Categories: Utility;Development;
+
+dmg:
+  contents:
+    - x: 130
+      y: 220
+    - x: 410
+      y: 220
+      type: link
+      path: /Applications
